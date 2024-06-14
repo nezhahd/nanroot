@@ -91,6 +91,7 @@
 
     }
 
+    output=$(output_status)
 
     current_timezone() {
     if grep -q 'Alpine' /etc/issue; then
