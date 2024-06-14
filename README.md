@@ -2,5 +2,6 @@
 
 一键脚本
 ```
-bash <(curl -Lsc https://raw.githubusercontent.com/nezhahd/nanroot/blob/main/root.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/nezhahd/nanroot/main/root.sh)
+
 ```
