@@ -54,7 +54,7 @@
       fi
     fi
 
-    output_status
+
 
     current_time=$(date "+%Y-%m-%d %I:%M %p")
 
@@ -74,6 +74,14 @@
 
     timezone=$(current_timezone)
 
+    current_timezone() {
+    if grep -q 'Alpine' /etc/issue; then
+       date +"%Z %z"
+    else
+       timedatectl | grep "Time zone" | awk '{print $3}'
+    fi
+
+}
 
     echo ""
     echo "系统信息查询"
