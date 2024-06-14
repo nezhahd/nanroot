@@ -1,6 +1,6 @@
   clear
     # 函数: 获取IPv4和IPv6地址
-    ip_address
+  
 
     if [ "$(uname -m)" == "x86_64" ]; then
       cpu_info=$(cat /proc/cpuinfo | grep 'model name' | uniq | sed -e 's/model name[[:space:]]*: //')
@@ -97,8 +97,8 @@
     echo "------------------------"
     echo "网络拥堵算法: $congestion_algorithm $queue_algorithm"
     echo "------------------------"
-    echo "公网IPv4地址: $ipv4_address"
-    echo "公网IPv6地址: $ipv6_address"
+    echo "公网IPv4地址: $(curl -s ipv4.ip.sb)"
+    echo "公网IPv6地址: $(curl -s --max-time 1 ipv6.ip.sb)"
     echo "------------------------"
     echo "地理位置: $country $city"
     echo "系统时区: $timezone"
@@ -107,4 +107,4 @@
     echo "系统运行时长: $runtime"
     echo
 
-    ;;
+    
