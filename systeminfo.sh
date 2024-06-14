@@ -72,7 +72,7 @@
 
     runtime=$(cat /proc/uptime | awk -F. '{run_days=int($1 / 86400);run_hours=int(($1 % 86400) / 3600);run_minutes=int(($1 % 3600) / 60); if (run_days > 0) printf("%d天 ", run_days); if (run_hours > 0) printf("%d时 ", run_hours); printf("%d分\n", run_minutes)}')
 
-    timezone=$(current_timezone)
+   
 
     current_timezone() {
     if grep -q 'Alpine' /etc/issue; then
@@ -80,9 +80,9 @@
     else
        timedatectl | grep "Time zone" | awk '{print $3}'
     fi
-
-}
-
+     }
+     
+     timezone=$(current_timezone)
     echo ""
     echo "系统信息查询"
     echo "------------------------"
