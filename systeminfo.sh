@@ -120,7 +120,7 @@
     echo "虚拟内存: $swap_info"
     echo "硬盘占用: $disk_info"
     echo "------------------------"
-    echo  output_status
+    echo "$output"
     echo "------------------------"
     echo "网络拥堵算法: $congestion_algorithm $queue_algorithm"
     echo "------------------------"
