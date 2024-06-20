@@ -9,7 +9,7 @@ apt install -y openssh-server
 # 启用 ROOT 登录
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-
+rm -rf /etc/ssh/sshd_config.d/* /etc/ssh/ssh_config.d/*
 # 重启 SSH 服务
 systemctl restart ssh
 
