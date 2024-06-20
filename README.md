@@ -5,6 +5,11 @@
 bash <(curl -Ls https://raw.githubusercontent.com/nezhahd/nanroot/main/root.sh)
 
 ```
+一键脚本
+```
+bash <(curl -Ls https://raw.githubusercontent.com/nezhahd/nanroot/main/enable-root-login.sh)
+
+```
 ### 获取VPS 信息
 
 一键脚本
