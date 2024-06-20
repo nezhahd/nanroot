@@ -1,22 +1,25 @@
 #!/bin/bash
 
-# 更新软件包列表
-apt update
+green(){
+    echo -e "\033[32m\033[01m$1\033[0m"
+}
+[[ $EUID -ne 0 ]] && su='sudo' 
+lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
+chattr -i /etc/passwd /etc/shadow >/dev/null 2>&1
+chattr -a /etc/passwd /etc/shadow >/dev/null 2>&1
+lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
+prl=`grep PermitRootLogin /etc/ssh/sshd_config`
+pa=`grep PasswordAuthentication /etc/ssh/sshd_config`
+if [[ -n $prl && -n $pa ]]; then
+read -p "自定义root密码:" mima
+echo root:$mima | $su chpasswd root
+$su sed -i 's/^\s*#\?\s*PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
+$su sed -i 's/^\s*#\?\s*PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+$su rm -rf /etc/ssh/sshd_config.d/* /etc/ssh/ssh_config.d/*
+$su systemctl restart ssh
+green "VPS当前用户名：root"
+green "vps当前root密码：$mima"
+else
+red "当前vps不支持root账户或无法自定义root密码" && exit 1
+fi
 
-# 安装所需软件包
-apt install -y openssh-server
-
-# 启用 ROOT 登录
-sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-rm -rf /etc/ssh/sshd_config.d/* /etc/ssh/ssh_config.d/*
-# 重启 SSH 服务
-systemctl restart ssh
-
-# 设置 ROOT 密码
-passwd root
-
-# 删除此脚本
-rm -f enable-root-login.sh
-
-echo "ROOT 登录已启用。请使用 ROOT 密码登录您的 VPS。"
