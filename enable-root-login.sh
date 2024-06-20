@@ -10,7 +10,7 @@ sudo apt install -y openssh-server
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 
 # 重启 SSH 服务
-sudo systemctl restart sshd
+sudo systemctl restart ssh
 
 # 设置 ROOT 密码
 sudo passwd root
